@@ -102,7 +102,7 @@ func (t *SimpleChaincode) Init(stub  shim.ChaincodeStubInterface, function strin
 	bytes, err := json.Marshal(assetHolder)
 												if err != nil { return nil, errors.New("Error creating assetHolder record") }
 																
-	err = stub.PutState("assetid", bytes)
+	err = stub.PutState("arrassetid", bytes)
 	
 	for i:=0; i < len(args); i=i+2 {
 		
@@ -192,7 +192,7 @@ func (t *SimpleChaincode) retrieve_assets(stub  shim.ChaincodeStubInterface, ass
 	var d Diamond
 	
 	
-	bytes, err := stub.GetState(asset);					
+	bytes, err := stub.GetState(assett);					
 				
 															if err != nil {	fmt.Printf("RETRIEVEassets: Failed to invoke assets_id: %s", err); return d, errors.New("RETRIEVEassets: Error retrieving assets with assetid = " + assett) }
 
@@ -389,7 +389,7 @@ func (t *SimpleChaincode) create_diamond(stub  shim.ChaincodeStubInterface, call
 			
 																		if err != nil { fmt.Printf("CREATE_DIAMOND: Error saving changes: %s", err); return nil, errors.New("Error saving changes") }
 	
-	bytes, err := stub.GetState("assetid")
+	bytes, err := stub.GetState("arrassetid")
 
 																		if err != nil {fmt.Printf("Unable to get assetIDs"); return nil, errors.New("Unable to get assetIDs") }
 																		
@@ -468,7 +468,7 @@ func (t *SimpleChaincode) distributor_to_dealer(stub  shim.ChaincodeStubInterfac
 	
 	_, err := t.save_changes(stub, d)
 	
-															if err != nil { fmt.Printf("DISTRIBUTOR_TO_DEALER: Error saving changes: %s", err); return nil, errors.New("Error saving changes") }
+															if err != nil { fmt.Printf("distributor_TO_DEALER: Error saving changes: %s", err); return nil, errors.New("Error saving changes") }
 	
 	return nil, nil
 	
